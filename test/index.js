@@ -14,7 +14,15 @@ describe('stringRaw', () => {
     assert(error instanceof TypeError);
     assert(error.message === 'Cannot convert undefined or null to object');
 
+    error = throws(() => {stringRaw('');});
+    assert(error instanceof TypeError);
+    assert(error.message === 'Cannot convert undefined or null to object');
+
     error = throws(() => {stringRaw(null);});
+    assert(error instanceof TypeError);
+    assert(error.message === 'Cannot convert undefined or null to object');
+
+    error = throws(() => {stringRaw({ raw: null });});
     assert(error instanceof TypeError);
     assert(error.message === 'Cannot convert undefined or null to object');
   });
@@ -22,6 +30,7 @@ describe('stringRaw', () => {
   it('should follow the results of String.raw of NodeJS', () => {
     const arg1 = 'foo';
     const arg2 = 'bar';
+
     assert(stringRaw`` === String.raw``);
     assert(stringRaw`hoge` === String.raw`hoge`);
     assert(stringRaw`hoge${arg1}` === String.raw`hoge${arg1}`);
@@ -43,16 +52,22 @@ describe('stringRaw', () => {
       `
     );
 
-    const literal0 = { raw: [] };
-    assert(stringRaw(literal0, arg1, arg2) === String.raw(literal0, arg1, arg2));
+    const args0 = [{ raw: [] }, arg1, arg2];
+    assert(stringRaw(...args0) === String.raw(...args0));
 
-    const literal1 = { raw: ['hoge'] };
-    assert(stringRaw(literal1, arg1, arg2) === String.raw(literal1, arg1, arg2));
+    const args1 = [{ raw: ['hoge'] }, arg1, arg2];
+    assert(stringRaw(...args1) === String.raw(...args1));
 
-    const literal2 = { raw: ['hoge', 'fuga'] };
-    assert(stringRaw(literal2, arg1, arg2) === String.raw(literal2, arg1, arg2));
+    const args2 = [{ raw: ['hoge', 'fuga'] }, arg1, arg2];
+    assert(stringRaw(...args2) === String.raw(...args2));
 
-    const literal3 = { raw: ['hoge', 'fuga', 'piyo'] };
-    assert(stringRaw(literal3, arg1, arg2) === String.raw(literal3, arg1, arg2));
+    const args3 = [{ raw: ['hoge', 'fuga', 'piyo'] }, arg1, arg2];
+    assert(stringRaw(...args3) === String.raw(...args3));
+
+    const args4 = [{ raw: {} }, arg1, arg2];
+    assert(stringRaw(...args4) === String.raw(...args4));
+
+    const args5 = [{ raw: true }, arg1, arg2];
+    assert(stringRaw(...args5) === String.raw(...args5));
   });
 });
