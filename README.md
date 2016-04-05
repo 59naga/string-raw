@@ -55,6 +55,38 @@ stringRaw(null); // TypeError: Cannot convert undefined or null to object
 stringRaw({ raw: null }); // TypeError: Cannot convert undefined or null to object
 ```
 
+Stacktrace was broken
+---
+```bash
+node
+> require('string-raw')('error')
+# TypeError: Cannot convert undefined or null to object
+# at f (/path/to/string-raw/lib/index.js:1:59798)
+```
+published code is compressed and the source map is provided.
+sourcemap isn't supported on NodeJS(current v5.10.0). but this resolved in the [node-source-map-support](https://github.com/evanw/node-source-map-support#readme).
+
+```bash
+npm install source-map-support --save-dev
+```
+```js
+import 'source-map-support/register';
+```
+or...
+```bash
+$ mocha --require source-map-support/register
+```
+
+you can check the line number before compilation.
+
+```bash
+node
+> require('source-map-support/register');
+> require('string-raw')('error');
+# TypeError: Cannot convert undefined or null to object
+#    at f (/Users/59naga/Downloads/string-raw/src/index.js:17:11)
+```
+
 Development
 ---
 Requirement global
