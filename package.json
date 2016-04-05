@@ -1,6 +1,6 @@
 {
   "name": "string-raw",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a ponyfill for the ES6 String.raw()",
   "main": "lib",
   "files": [
