@@ -1,18 +1,19 @@
 {
-  "presets": [
-    "es2015",
-    "stage-1"
-  ],
   "env": {
     "development": {
+      "presets": [
+        "es2015",
+        "stage-1"
+      ],
       "plugins": [
         "espower"
       ]
     },
     "production": {
-      "plugins": [
-        "add-module-exports"
-      ],
+      "presets": [
+        "es2015-rollup",
+        "stage-1"
+      ]
     }
   }
 }
