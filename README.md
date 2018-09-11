@@ -1,6 +1,8 @@
 String Raw
 ---
 
+> A [ponyfill](https://ponyfill.com) for the ES6 `String.raw()`
+
 <p align="right">
   <a href="https://npmjs.org/package/string-raw">
     <img src="https://img.shields.io/npm/v/string-raw.svg?style=flat-square">
